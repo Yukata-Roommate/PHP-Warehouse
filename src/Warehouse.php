@@ -286,6 +286,54 @@ class Warehouse extends Data implements WarehouseInterface
      *----------------------------------------*/
 
     /**
+     * remove data
+     * 
+     * @param string|array<string> $target
+     * @return static
+     */
+    public function remove(string|array $target): static
+    {
+        if (is_string($target)) $target = [$target];
+
+        $tmp = [];
+
+        foreach ($this->data as $key => $value) {
+            if (in_array($key, $target)) continue;
+
+            $tmp[$key] = $value;
+        }
+
+        $this->data = $tmp;
+
+        return $this;
+    }
+
+    /**
+     * remove data recursive
+     * 
+     * @param string|array<string> $target
+     * @return static
+     */
+    public function removeRecursive(string|array $target): static
+    {
+        if (is_string($target)) $target = [$target];
+
+        $tmp = [];
+
+        foreach ($this->data as $key => $value) {
+            if (is_array($value)) $value = (new static($value))->removeRecursive($target)->data();
+
+            if (in_array($key, $target)) continue;
+
+            $tmp[$key] = $value;
+        }
+
+        $this->data = $tmp;
+
+        return $this;
+    }
+
+    /**
      * remove empty value
      * 
      * @return static

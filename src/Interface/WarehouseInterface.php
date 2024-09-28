@@ -138,6 +138,22 @@ interface WarehouseInterface extends DataInterface
      *----------------------------------------*/
 
     /**
+     * remove data
+     * 
+     * @param string|array<string> $target
+     * @return static
+     */
+    public function remove(string|array $target): static;
+
+    /**
+     * remove data recursive
+     * 
+     * @param string|array<string> $target
+     * @return static
+     */
+    public function removeRecursive(string|array $target): static;
+
+    /**
      * remove empty value
      * 
      * @return static

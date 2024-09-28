@@ -184,6 +184,30 @@ class Manager
     }
 
     /**
+     * remove data
+     * 
+     * @param array $data
+     * @param string|array<string> $target
+     * @return array
+     */
+    public function remove(array $data, string|array $target): array
+    {
+        return $this->make($data)->remove($target)->data();
+    }
+
+    /**
+     * remove data recursive
+     * 
+     * @param array $data
+     * @param string|array<string> $target
+     * @return array
+     */
+    public function removeRecursive(array $data, string|array $target): array
+    {
+        return $this->make($data)->removeRecursive($target)->data();
+    }
+
+    /**
      * remove empty value
      * 
      * @param array $data
